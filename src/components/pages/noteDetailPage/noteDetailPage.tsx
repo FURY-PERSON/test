@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import useFetching from "../../hooky/useFetching";
 import { NoteProps } from "../../note/note";
+import { NoteDetail } from "../../noteDetail/noteDetail";
 import ServerService from "../../serverService/serverService";
 import Loader from "../../UI/loader/loader";
 
 export function NoteDetailPage () {
   const param = useParams<{id:string}>();
-  const [getNotesFromServer, isLoadingGet, errGet] = useFetching(() => ServerService.getNoteById(param.id));
-  const [patchNoteInServer, isLoadingPatch, errPatch] = useFetching(() => ServerService.updateNoteById(param.id));
+  const [getNotesFromServer, isLoading, err] = useFetching(() => ServerService.getNoteById(param.id));
   const [note, setNote] = useState<NoteProps>();
   useEffect(() => {
     setNote(getNotesFromServer());
@@ -16,10 +16,13 @@ export function NoteDetailPage () {
 
   return(
   <div className="noteDetailPage">
-    {isLoadingGet ?
+    {isLoading ?
     <Loader></Loader> :
     <div className="noteDetailPage_wrapper">
-      //TODO заметку детально с инпутами
+      {(note !== undefined) ? 
+        <NoteDetail {...note}></NoteDetail> :
+        <h3>Не существует</h3>
+      }
     </div>
     }
   </div>)

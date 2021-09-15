@@ -24,9 +24,9 @@ export default function AppRouter() {
           <Route path="/notfound">
             <NotFoundPage></NotFoundPage>
           </Route>
-{/*           <Route exact path="/">
-            <Redirect to='/posts'></Redi>
-          </Route> */}
+          <Route exact path="/">
+            <Redirect to='/addNewNote'></Redirect>
+          </Route>
           <Redirect to='/notfound'></Redirect>
         </Switch>
       </CSSTransition>
