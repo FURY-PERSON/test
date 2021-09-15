@@ -2,6 +2,7 @@ import { Redirect, Route, Switch, useLocation } from "react-router";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { AddNewNotePage } from "./components/pages/addNewNotePage/addNewNotePage";
 import { NoteDetailPage } from "./components/pages/noteDetailPage/noteDetailPage";
+import { NotesPage } from "./components/pages/notesPage/notesPage";
 import { NotFoundPage } from "./components/pages/notFoundPage/notFoundPage";
 
 export default function AppRouter() {
@@ -14,9 +15,9 @@ export default function AppRouter() {
           <Route path={`/addNewNote`}>
             <AddNewNotePage></AddNewNotePage>
           </Route>
-{/*           <Route exact path="/posts">
-            <Posts />
-          </Route> */}
+          <Route exact path="/notes">
+            <NotesPage></NotesPage>
+          </Route>
           <Route exact path="/posts/:id">
             <NoteDetailPage></NoteDetailPage>
           </Route>

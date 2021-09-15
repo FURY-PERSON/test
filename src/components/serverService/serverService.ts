@@ -27,12 +27,17 @@ async function addNewNote(note:NoteProps) {
   return isSuccess;
 }
 
+async function getNotesByTags(tags:string) {
+
+}
+
 const ServerService = {
   getNotes,
   getNoteById,
   updateNoteById,
   deleteNoteById,
-  addNewNote
+  addNewNote,
+  getNotesByTags
 }
 
 export default ServerService;
