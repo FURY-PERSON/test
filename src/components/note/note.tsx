@@ -1,6 +1,14 @@
+import { useHistory } from "react-router"
+
 export function Note(noteProps:NoteProps) {
+  const router = useHistory();
+
+  const onNoteClick = () => {
+    router.push(`/note/${noteProps.id}`);
+  }
+
   return(
-  <div className="note">
+  <div className="note" onClick={onNoteClick}>
     <div className="note__importance">{noteProps.importance}</div>
     <h2 className="note__title">{noteProps.importance}</h2>
     <p className="note__description">{noteProps.description}</p>

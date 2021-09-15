@@ -1,6 +1,7 @@
 import { Redirect, Route, Switch, useLocation } from "react-router";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { AddNewNotePage } from "./components/pages/addNewNotePage/addNewNotePage";
+import { NoteDetailPage } from "./components/pages/noteDetailPage/noteDetailPage";
 
 export default function AppRouter() {
   let location =  useLocation();
@@ -14,11 +15,11 @@ export default function AppRouter() {
           </Route>
 {/*           <Route exact path="/posts">
             <Posts />
-          </Route>
+          </Route> */}
           <Route exact path="/posts/:id">
-            <CardDetails></CardDetails>
+            <NoteDetailPage></NoteDetailPage>
           </Route>
-          <Route path="/notfound">
+{/*           <Route path="/notfound">
             <NotFound></NotFound>
           </Route>
 {          <Route exact path="/">
