@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import "./addCardForm.scss";
 import { NoteProps } from '../note/note';
+import ServerService from '../serverService/serverService';
+import useFetching from "../hooky/useFetching";
+import Loader from '../UI/loader/loader';
 
 export default function NoteForm() {
-
+  const [addNoteToServer, isLoading, err] = useFetching(()=>ServerService.addNewNote(note));
   const [note, setNote] = useState<NoteProps>({
     date:String(Date.now()),
     description:'',
@@ -30,6 +33,8 @@ export default function NoteForm() {
 
   return(
     <form className="noteForm" onSubmit={addNote}>
+      {isLoading ?
+      <Loader></Loader> :
       <div className="noteForm__wrapper">
         <input className="noteForm__titleInput" placeholder="Title" onChange={onTitleChange} 
                value={note.title}  type="text"  required />
@@ -37,14 +42,21 @@ export default function NoteForm() {
                value={note.description}  />
         <input className="noteForm__tagsInput" placeholder="Tags" onChange={onTagsChange} 
                value={note.tags} type="text" />
-      </div>      
+      </div>   
+      }   
     </form>
   );
 
 
-  function addNote(event:React.FormEvent) {
+  async function addNote(event:React.FormEvent) {
     event.preventDefault();
-    resetForm();
+    const isSuccess = await addNoteToServer();
+
+    if(isSuccess) {
+      resetForm();
+    } else {
+      alert(err);
+    }
   }
 
   function resetForm() {

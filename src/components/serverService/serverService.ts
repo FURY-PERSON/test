@@ -1,3 +1,4 @@
+import { NoteProps } from "../note/note";
 import StoreService from "./stoteService";
 
 async function getNotes() {
@@ -20,11 +21,18 @@ async function deleteNoteById(id:string) {
   return isSuccess;
 }
 
+async function addNewNote(note:NoteProps) {
+  const noteStr = JSON.stringify(note);
+  const isSuccess = await StoreService.addNewNote(noteStr);
+  return isSuccess;
+}
+
 const ServerService = {
   getNotes,
   getNoteById,
   updateNoteById,
-  deleteNoteById
+  deleteNoteById,
+  addNewNote
 }
 
 export default ServerService;

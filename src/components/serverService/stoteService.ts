@@ -19,11 +19,16 @@ async function deleteNoteById(id:string) {
 
 }
 
+async function addNewNote(noteStr:string) {
+
+}
+
 const StoreService = {
   fetchNotes,
   fetchNoteById,
   patchNoteById,
-  deleteNoteById
+  deleteNoteById,
+  addNewNote
 }
 
 export default StoreService;
