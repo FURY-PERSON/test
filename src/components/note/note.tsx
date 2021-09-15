@@ -14,5 +14,6 @@ export interface NoteProps {
   description: string,
   date: string,
   importance: number,
-  tags: string
+  tags: string,
+  id:string
 }

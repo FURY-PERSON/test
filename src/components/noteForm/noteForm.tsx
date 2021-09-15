@@ -9,7 +9,8 @@ export default function NoteForm() {
     description:'',
     title:'',
     importance:0,
-    tags:''
+    tags:'',
+    id:''
   });
 
   const onTitleChange = (event: React.ChangeEvent) => {
@@ -52,7 +53,8 @@ export default function NoteForm() {
       description:'',
       title:'',
       importance:0,
-      tags:''
+      tags:'',
+      id:''
     });
   }
 }
