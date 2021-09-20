@@ -4,9 +4,16 @@ import { NoteProps } from '../note/note';
 import ServerService from '../serverService/serverService';
 import useFetching from "../hooky/useFetching";
 import Loader from '../UI/loader/loader';
+import { hashCode } from '../../tool/hashFunction';
 
 export default function NoteForm() {
-  const addNewNote = () => {ServerService.addNewNote(note)};
+  const addNewNote = () => {
+    const noteToStore:NoteProps = { //т.к хуки асинхронны
+      ...note,
+      id: String(hashCode(note.title + Date.now()))
+    }
+    ServerService.addNewNote(noteToStore);
+  };
   const [addNoteToServer, isLoading, err] = useFetching(addNewNote);
   const [note, setNote] = useState<NoteProps>({
     date:String(Date.now()),
