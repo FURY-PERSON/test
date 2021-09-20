@@ -1,0 +1,72 @@
+.noteDetail {
+  width: 70%;
+  margin: 0 auto;
+  border: 2px solid blanchedalmond;
+  border-radius: 5px;
+  margin-top: 20px;
+  padding: 35px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  &__edit {
+    position: absolute;
+    right: 60px;
+    top: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  &__importance {
+    position: absolute;
+    top: 7px;
+    left: 20px;
+    width: 50px;
+  }
+
+  &__title {
+    height: 30px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 600;
+    padding: 5px;
+  }
+
+  &__description {
+    margin-top: 30px;
+    width: 100%;
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 60px;
+  }
+
+  &__date {
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    color: rgb(110, 108, 108);
+    font-size: 14px;
+  }
+
+  &__tags {
+    position: absolute;
+    left: 20px;
+    bottom: 15px;
+    width: 530px;
+    font-size: 23px;
+  }
+
+  &__closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 19px;
+    background-color: transparent;
+    border: 1px solid blanchedalmond;
+    border-radius: 6px;
+  }
+
+}

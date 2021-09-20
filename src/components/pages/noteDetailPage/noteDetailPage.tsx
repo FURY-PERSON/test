@@ -21,7 +21,7 @@ export function NoteDetailPage () {
   }, [])
 
   return(
-  <div className="noteDetailPage">
+  <div className="page noteDetailPage">
     {isLoading ?
     <Loader></Loader> :
     <div className="noteDetailPage_wrapper">

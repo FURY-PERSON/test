@@ -1,0 +1,52 @@
+.noteForm {
+  width: 60%;
+  margin: 0 auto;
+  border: 3px solid black;
+  border-radius: 10px;
+  margin-top: 40px;
+  padding: 20px 40px;
+  font-family: "Roboto", sans-serif;
+  position: relative;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  &__titleInput {
+    width: 60%;
+    height: 40px;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  &__descriptionInput {
+    width: 80%;
+    min-height: 300px;
+    height: 100%;
+    margin-top: 10px;
+    font-size: 20px;
+    padding-left: 30px;
+    padding-top: 10px;
+  }
+
+  &__tagsInput {
+    width: 30%;
+    height: 30px;
+    margin-top: 10px; 
+    margin-right: 450px;
+    padding-left: 10px;
+    margin-bottom: 40px;
+  }
+
+  &__saveBtn {
+    width: 80px;
+    height: 30px;
+    position: absolute;
+    right: 100px;
+    bottom: 20px;
+    cursor: pointer;
+  }
+}

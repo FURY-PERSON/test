@@ -1,10 +1,11 @@
-import { useHistory } from "react-router"
+import { useHistory } from "react-router";
+import "./note.scss";
 
 export function Note(noteProps:NoteProps) {
   const router = useHistory();
 
   const onNoteClick = () => {
-    router.push(`/note/${noteProps.id}`);
+    router.push(`/notes/${noteProps.id}`);
   }
 
   return(
@@ -12,8 +13,8 @@ export function Note(noteProps:NoteProps) {
     <div className="note__importance">{noteProps.importance}</div>
     <h2 className="note__title">{noteProps.title}</h2>
     <p className="note__description">{noteProps.description}</p>
-    <span className="note__date">{noteProps.date}</span>
     <span className="note__tags">{noteProps.tags}</span>
+    <span className="note__date">{noteProps.date}</span>
   </div>)
 }
 

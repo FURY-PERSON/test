@@ -48,7 +48,7 @@ export default function NoteForm() {
                value={note.title}  type="text"  required />
         <textarea className="noteForm__descriptionInput" placeholder="Description" onChange={onDescriptionChange} 
                value={note.description}  />
-        <input className="noteForm__tagsInput" placeholder="Tags" onChange={onTagsChange} 
+        <input className="noteForm__tagsInput" placeholder="Tags (separated with #)" onChange={onTagsChange} 
                value={note.tags} type="text" />
         <button className="noteForm__saveBtn" onClick={(ev) => addNote(ev)}>Save</button>
       </div>

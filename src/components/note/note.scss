@@ -1,0 +1,48 @@
+.note {
+  margin-top: 30px;
+  width: 40%;
+  border: 3px solid blanchedalmond;
+  border-radius: 15px;
+  position: relative;
+  padding: 15px 30px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  box-shadow: 2px 2px 7px rgba(0,0,0,0.4);
+  &:hover {
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.6);
+    transform: scale(1.01);
+    transition: all 0.1s linear;
+  }
+  &:active {
+    box-shadow: 3px 3px 20px rgba(0,0,0,0.5);
+    transform: scale(0.99);
+    transition: all 0.1s linear;
+  }
+
+  &__importance {
+    position: absolute;
+    right: 30px;
+    top: 5px;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__description {
+    margin-top: 7px;
+    height: 80px;
+    text-overflow: clip;
+  }
+
+  &__tags {
+    font-size: 11px;
+    color:gray;
+  }
+
+  &__date {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+}

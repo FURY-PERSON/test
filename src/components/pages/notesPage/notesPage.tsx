@@ -4,6 +4,7 @@ import { Note, NoteProps } from "../../note/note";
 import { SearchBar, SearchBarProps } from "../../searchBar/searchBar";
 import ServerService from "../../serverService/serverService";
 import Loader from "../../UI/loader/loader";
+import "./notesPage.scss";
 
 export function NotesPage() {
   const get = async  () => {
@@ -24,7 +25,7 @@ export function NotesPage() {
   }
 
   return(
-  <div className="notesPage">
+  <div className="page notesPage">
     {isLoading ?
       <Loader></Loader> :
       <>

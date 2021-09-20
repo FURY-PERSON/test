@@ -18,7 +18,7 @@ export default function AppRouter() {
           <Route exact path="/notes">
             <NotesPage></NotesPage>
           </Route>
-          <Route exact path="/note/:id">
+          <Route exact path="/notes/:id">
             <NoteDetailPage></NoteDetailPage>
           </Route>
           <Route path="/notfound">
