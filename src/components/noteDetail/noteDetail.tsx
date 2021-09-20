@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useHistory } from "react-router";
 import { NavLink } from "react-router-dom";
 import useFetching from "../hooky/useFetching";
 import { NoteProps } from "../note/note";

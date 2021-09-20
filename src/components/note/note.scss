@@ -1,22 +1,27 @@
 .note {
-  margin-top: 30px;
   width: 40%;
-  border: 3px solid blanchedalmond;
-  border-radius: 15px;
+  margin-top: 30px;
   position: relative;
-  padding: 15px 30px;
   cursor: pointer;
-  transition: all 0.1s linear;
-  box-shadow: 2px 2px 7px rgba(0,0,0,0.4);
-  &:hover {
-    box-shadow: 5px 5px 10px rgba(0,0,0,0.6);
-    transform: scale(1.01);
+
+
+  &__wrapper {
+    padding: 15px 30px;
     transition: all 0.1s linear;
-  }
-  &:active {
-    box-shadow: 3px 3px 20px rgba(0,0,0,0.5);
-    transform: scale(0.99);
-    transition: all 0.1s linear;
+    box-shadow: 2px 2px 7px rgba(0,0,0,0.4);
+    border: 3px solid blanchedalmond;
+    border-radius: 15px;
+    position: relative;
+    &:hover {
+      box-shadow: 5px 5px 10px rgba(0,0,0,0.6);
+      transform: scale(1.01);
+      transition: all 0.1s linear;
+    }
+    &:active {
+      box-shadow: 3px 3px 20px rgba(0,0,0,0.5);
+      transform: scale(0.99);
+      transition: all 0.1s linear;
+    }
   }
 
   &__importance {
@@ -44,5 +49,16 @@
     position: absolute;
     right: 10px;
     bottom: 10px;
+  }
+
+  &__deleteBtn {
+    color:red;
+    position: absolute;
+    left: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    background-color: transparent;
+    font-weight: 500;
   }
 }
