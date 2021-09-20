@@ -32,12 +32,17 @@
 
   &__title {
     text-align: center;
+    word-wrap: break-word;
   }
 
   &__description {
     margin-top: 7px;
     height: 80px;
-    text-overflow: clip;
+    width: 80%;
+    word-wrap: break-word;
+    overflow: scroll;
+
+    &::-webkit-scrollbar { width: 0; }
   }
 
   &__tags {

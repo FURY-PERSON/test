@@ -30,7 +30,7 @@ export function NoteDetail(props:NoteProps) {
     setNoteDetail({...noteDetail, title: value});
   }
 
-  const onDescriptionChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+  const onDescriptionChange = (event:React.ChangeEvent<any>) => {
     const value = event.target.value;
     setNoteDetail({...noteDetail, description: value});
   }
@@ -58,7 +58,7 @@ export function NoteDetail(props:NoteProps) {
             <NavLink to={"/notes"} className="noteDetail__closeBtn" >&#10060;</NavLink>
             <button className="noteDetail__edit" onClick={() => saveNote()}>apply</button>
             <input className="noteDetail__title" value={noteDetail.title} onChange={onTitleChange}></input>
-            <input className="noteDetail__description" value={noteDetail.description} onChange={onDescriptionChange}></input>
+            <textarea className="noteDetail__description textArea" value={noteDetail.description} onChange={onDescriptionChange}></textarea>
             <span className="noteDetail__date">{noteDetail.date}</span>
             <input className="noteDetail__tags" value={noteDetail.tags} onChange={onTagsChange}></input>
           </div>

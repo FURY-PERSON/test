@@ -33,6 +33,7 @@
     text-align: center;
     font-weight: 600;
     padding: 5px;
+    word-wrap: break-word;
   }
 
   &__description {
@@ -41,6 +42,18 @@
     font-size: 17px;
     font-weight: 400;
     margin-bottom: 60px;
+    word-wrap: break-word;
+    min-height: 150px;
+    height: 100%;
+    padding: 7px;
+    padding-left: 10px;
+  }
+
+  .textArea{
+    min-height: 150px;
+    height: 100%;
+    padding: 7px;
+    padding-left: 10px;
   }
 
   &__date {

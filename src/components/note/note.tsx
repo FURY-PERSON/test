@@ -11,7 +11,6 @@ export function Note(noteProps:NoteProps) {
 
   const onDeleteBtnClick = async () => {
     await ServerService.deleteNoteById(noteProps.id);
-    console.log('del')
     router.push("/notes");
   }
 
