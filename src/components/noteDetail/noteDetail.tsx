@@ -11,7 +11,7 @@ export function NoteDetail(props:NoteProps) {
   const [saveNote, isLoading, err] = useFetching(() => saveChanges());
 
   const saveChanges = async () => {
-    const isSuccess = await ServerService.updateNoteById(noteDetail.id);
+    const isSuccess = await ServerService.updateNote(noteDetail);
 
     if(/* isSuccess */ true) {
       setIsEditMode(false);

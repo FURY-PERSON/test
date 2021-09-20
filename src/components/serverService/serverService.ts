@@ -1,40 +1,45 @@
 import { NoteProps } from "../note/note";
-import StoreService from "./stoteService";
+import Store from "./stote";
+
+
+async function addNewNote(note:NoteProps) {
+  /*   const noteStr = JSON.stringify(note); */
+    const isSuccess = await Store.addNote(note) as boolean;
+    console.log(111111)
+    return isSuccess;
+}
 
 async function getNotes() {
-  const notes = await StoreService.fetchNotes();
+  const notes = await Store.getNotes();
   return notes;
 }
 
 async function getNoteById(id:string) {
-  const note = await StoreService.fetchNoteById(id);
+  const note = await Store.getNoteById(id);
   return note;
 }
 
-async function updateNoteById(id:string) {
-  const note = await StoreService.patchNoteById(id);
+async function updateNote(note:NoteProps) {
+/*   const noteStr = JSON.stringify(note); */
+  const isSuccess = await Store.updateNote(note);
   return note
 }
 
 async function deleteNoteById(id:string) {
-  const isSuccess = await StoreService.patchNoteById(id);
-  return isSuccess;
-}
-
-async function addNewNote(note:NoteProps) {
-  const noteStr = JSON.stringify(note);
-  const isSuccess = await StoreService.addNewNote(noteStr);
+  const isSuccess = await Store.deleteNoteById(id);
   return isSuccess;
 }
 
 async function getNotesByTags(tags:string) {
-
+  const notes = await getNotes();
+  notes.filter((note) => note.tags.includes(tags));
+  return notes;
 }
 
 const ServerService = {
   getNotes,
   getNoteById,
-  updateNoteById,
+  updateNote,
   deleteNoteById,
   addNewNote,
   getNotesByTags

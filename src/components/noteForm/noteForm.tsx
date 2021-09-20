@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import "./addCardForm.scss";
+import "./noteForm.scss";
 import { NoteProps } from '../note/note';
 import ServerService from '../serverService/serverService';
 import useFetching from "../hooky/useFetching";
 import Loader from '../UI/loader/loader';
 
 export default function NoteForm() {
-  const [addNoteToServer, isLoading, err] = useFetching(()=>ServerService.addNewNote(note));
+  const [addNoteToServer, isLoading, err] = useFetching(() => ServerService.addNewNote(note));
   const [note, setNote] = useState<NoteProps>({
     date:String(Date.now()),
     description:'',
@@ -28,11 +28,11 @@ export default function NoteForm() {
 
   const onTagsChange = (event: React.ChangeEvent) => {
     const value = (event.target as HTMLInputElement).value;
-    setNote({...note});
+    setNote({...note, tags:value});
   }
 
   return(
-    <form className="noteForm" onSubmit={addNote}>
+    <div className="noteForm" onSubmit={addNote}>
       {isLoading ?
       <Loader></Loader> :
       <div className="noteForm__wrapper">
@@ -42,9 +42,13 @@ export default function NoteForm() {
                value={note.description}  />
         <input className="noteForm__tagsInput" placeholder="Tags" onChange={onTagsChange} 
                value={note.tags} type="text" />
-      </div>   
+        <button className="noteForm__saveBtn" onClick={()=>{
+          addNoteToServer();
+          console.log('here')
+        }}>Save</button>
+      </div>
       }   
-    </form>
+    </div>
   );
 
 
