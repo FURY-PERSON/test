@@ -6,7 +6,8 @@ import useFetching from "../hooky/useFetching";
 import Loader from '../UI/loader/loader';
 
 export default function NoteForm() {
-  const [addNoteToServer, isLoading, err] = useFetching(() => ServerService.addNewNote(note));
+  const addNewNote = () => {ServerService.addNewNote(note)};
+  const [addNoteToServer, isLoading, err] = useFetching(addNewNote);
   const [note, setNote] = useState<NoteProps>({
     date:String(Date.now()),
     description:'',
@@ -32,7 +33,7 @@ export default function NoteForm() {
   }
 
   return(
-    <div className="noteForm" onSubmit={addNote}>
+    <form className="noteForm" onSubmit={addNote}>
       {isLoading ?
       <Loader></Loader> :
       <div className="noteForm__wrapper">
@@ -42,24 +43,20 @@ export default function NoteForm() {
                value={note.description}  />
         <input className="noteForm__tagsInput" placeholder="Tags" onChange={onTagsChange} 
                value={note.tags} type="text" />
-        <button className="noteForm__saveBtn" onClick={()=>{
-          addNoteToServer();
-          console.log('here')
-        }}>Save</button>
+        <button className="noteForm__saveBtn" onClick={(ev) => addNote(ev)}>Save</button>
       </div>
       }   
-    </div>
+    </form>
   );
 
 
   async function addNote(event:React.FormEvent) {
     event.preventDefault();
-    const isSuccess = await addNoteToServer();
-
-    if(isSuccess) {
+    await addNoteToServer();
+    if(err) {
       resetForm();
     } else {
-      alert(err);
+      resetForm();
     }
   }
 

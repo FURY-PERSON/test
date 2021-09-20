@@ -25,12 +25,12 @@ async function addNewNote(noteStr:string) {
  */
 
 
-async function createDB() {
+const createDB = () => {
   return new Promise((resolve, reject) => {
     dbReq = indexedDB.open('notesStore', 1);
     dbReq.onupgradeneeded = (event: Event) => {
       db = (<IDBRequest>event.target).result;
-      const people = db.createObjectStore('notes', { keyPath: 'id' });
+      db.createObjectStore('notes', { keyPath: 'id' });
       resolve(dbReq);
     };
     dbReq.onsuccess = (event: Event) => {
@@ -46,7 +46,7 @@ async function createDB() {
 const addNote = (newNote: NoteProps) => {
   return new Promise((res, rej) => {
     const tx = db.transaction(['notes'], 'readwrite');
-    const store = tx.objectStore('note');
+    const store = tx.objectStore('notes');
     store.add(newNote);
     res(true);
   });
@@ -127,6 +127,7 @@ const deleteNoteById = (id:string) => {
 
 
 const Store = {
+  createDB,
   addNote,
   updateNote,
   getNotes,

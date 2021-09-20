@@ -32,11 +32,19 @@ async function deleteNoteById(id:string) {
 
 async function getNotesByTags(tags:string) {
   const notes = await getNotes();
+  console.log('hhh')
   notes.filter((note) => note.tags.includes(tags));
+  console.log('hhh', notes)
   return notes;
 }
 
+async function createStore() {
+  const isSuccess = Store.createDB();
+  return isSuccess;
+}
+
 const ServerService = {
+  createStore,
   getNotes,
   getNoteById,
   updateNote,

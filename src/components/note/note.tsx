@@ -6,7 +6,7 @@ export function Note(noteProps:NoteProps) {
   const onNoteClick = () => {
     router.push(`/note/${noteProps.id}`);
   }
-
+  console.log('note')
   return(
   <div className="note" onClick={onNoteClick}>
     <div className="note__importance">{noteProps.importance}</div>
