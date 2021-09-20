@@ -100,11 +100,12 @@ const getNoteById = (id:string) => {
     req.onsuccess = (event: Event) => {
       if ((<IDBRequest>event.target).result) {
         const cursor = (<IDBRequest>event.target).result;
-        if(cursor.value === id)
+        if(cursor.value.id === id) {
           res(cursor.value)
+        }
         cursor.continue();
       } else {
-        rej();
+        res({});
       }
     };
   });

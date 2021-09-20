@@ -6,9 +6,12 @@ import Loader from "../UI/loader/loader";
 
 
 export function NoteDetail(props:NoteProps) {
+  const save = async  () => {
+    await saveChanges();
+  }
   const [isEditMode, setIsEditMode] = useState(false);
   const [noteDetail, setNoteDetail] = useState<NoteProps>(props);
-  const [saveNote, isLoading, err] = useFetching(() => saveChanges());
+  const [saveNote, isLoading, err] = useFetching(save);
 
   const saveChanges = async () => {
     const isSuccess = await ServerService.updateNote(noteDetail);

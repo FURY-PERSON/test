@@ -5,7 +5,6 @@ import Store from "./stote";
 async function addNewNote(note:NoteProps) {
   /*   const noteStr = JSON.stringify(note); */
     const isSuccess = await Store.addNote(note) as boolean;
-    console.log(111111)
     return isSuccess;
 }
 
@@ -15,7 +14,7 @@ async function getNotes() {
 }
 
 async function getNoteById(id:string) {
-  const note = await Store.getNoteById(id);
+  const note = await Store.getNoteById(id) as NoteProps;
   return note;
 }
 
@@ -32,9 +31,7 @@ async function deleteNoteById(id:string) {
 
 async function getNotesByTags(tags:string) {
   const notes = await getNotes();
-  console.log('hhh')
   notes.filter((note) => note.tags.includes(tags));
-  console.log('hhh', notes)
   return notes;
 }
 

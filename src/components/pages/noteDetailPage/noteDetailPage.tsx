@@ -8,10 +8,16 @@ import Loader from "../../UI/loader/loader";
 
 export function NoteDetailPage () {
   const param = useParams<{id:string}>();
-  const [getNotesFromServer, isLoading, err] = useFetching(() => ServerService.getNoteById(param.id));
+  const get = async () => {
+    const note = await ServerService.getNoteById(param.id);
+    setNote(note);
+  }
+  const [getNoteFromServer, isLoading, err] = useFetching(get);
   const [note, setNote] = useState<NoteProps>();
+
+
   useEffect(() => {
-    setNote(getNotesFromServer());
+    getNoteFromServer();
   }, [])
 
   return(
