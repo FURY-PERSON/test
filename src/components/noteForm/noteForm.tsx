@@ -19,7 +19,6 @@ export default function NoteForm() {
     date:String(Date.now()),
     description:'',
     title:'',
-    importance:0,
     tags:'',
     id:''
   });
@@ -72,7 +71,6 @@ export default function NoteForm() {
       date:String(Date.now()),
       description:'',
       title:'',
-      importance:0,
       tags:'',
       id:''
     });
