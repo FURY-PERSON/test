@@ -8,11 +8,18 @@ export function SearchBar(props: SearchBarProps){
     <div className="searchBar">
       <label className="searchBar__wrapper">
         <div className="searchBar__icon"></div>
-        <input onChange={(e)=>setSerchStr(e.target.value)} placeholder="Search" className="searchBar__input" />
+        <input onChange={makeSearchStr} placeholder="Search (enter tags seperated with whitespace)" className="searchBar__input" />
       </label>
       <button onClick={setQuery} type="submit" className="searchBar__btn">Search</button>
     </div>
   );
+
+  function makeSearchStr(event:React.ChangeEvent<HTMLInputElement>) {
+    const value = event.target.value;
+    let searchStr = '';
+    searchStr = value.split(' ').join('#');
+    setSerchStr(searchStr);
+  }
 
   function setQuery() {
     props.setQuery(serchStr);

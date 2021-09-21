@@ -27,17 +27,14 @@ export function NoteDetail(props:NoteProps) {
 
   const onTitleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setNoteDetail({...noteDetail, title: value});
+    const tagsSrt = defineTags(value);
+    setNoteDetail({...noteDetail, title: value, titleTags: tagsSrt});
   }
 
   const onDescriptionChange = (event:React.ChangeEvent<any>) => {
     const value = event.target.value;
-    setNoteDetail({...noteDetail, description: value});
-  }
-
-  const onTagsChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setNoteDetail({...noteDetail, tags: value});
+    const tagsSrt = defineTags(value);
+    setNoteDetail({...noteDetail, description: value, descriptionTags: tagsSrt});
   }
 
   return(
@@ -48,10 +45,10 @@ export function NoteDetail(props:NoteProps) {
           <div className="noteDetail">
             <NavLink to={"/notes"} className="noteDetail__closeBtn" >&#10060;</NavLink>
             <button className="noteDetail__edit" onClick={() => setIsEditMode(true)}>edit</button>
-            <h1 className="noteDetail__title">{noteDetail.title}</h1>
-            <p className="noteDetail__description">{noteDetail.description}</p>
+            <p className="noteDetail__title">{MakeMarckHtml(noteDetail.title)}</p>
+            <p className="noteDetail__description">{MakeMarckHtml(noteDetail.description)}</p>
             <span className="noteDetail__date">{noteDetail.date}</span>
-            <span className="noteDetail__tags">{noteDetail.tags}</span>
+            <span className="noteDetail__tags">{noteDetail.titleTags + " " + noteDetail.descriptionTags}</span>
           </div> :
 
           <div className="noteDetail">
@@ -60,10 +57,47 @@ export function NoteDetail(props:NoteProps) {
             <input className="noteDetail__title" value={noteDetail.title} onChange={onTitleChange}></input>
             <textarea className="noteDetail__description textArea" value={noteDetail.description} onChange={onDescriptionChange}></textarea>
             <span className="noteDetail__date">{noteDetail.date}</span>
-            <input className="noteDetail__tags" value={noteDetail.tags} onChange={onTagsChange}></input>
+            <span className="noteDetail__tags">{noteDetail.titleTags + " " + noteDetail.descriptionTags}</span>
           </div>
       }
     </>
   );
+
+  function defineTags(text: string) {
+    let tagsStr = '';
+    for(let i=0; i<text.length; i++) {
+      if(text[i] === '#') {
+        while(text[i] !== ' ' && i < text.length) {
+          tagsStr += text[i];
+          i++;
+        }
+      }
+    }
+    if(tagsStr.length === 1)
+      return ''
+    return tagsStr;
+  }
+
+  function MakeMarckHtml(text:string) {
+    const textWithIutHash = deleteHashSymbolFromText(text);
+    const tagsArr = (props.titleTags + props.descriptionTags).split('#');
+    let textArr = textWithIutHash.split(" ");
+    return (
+    <p>
+      {textArr.map((textt, i) => {
+        return tagsArr.includes(textArr[i]) ? <span className="marckSpan">{textArr[i]+ ' '}</span> : textArr[i] + ' ';
+      })}
+    </p>); 
+  }
+
+  function deleteHashSymbolFromText(text:string) {
+    let newText = "";
+    for(let i=0; i<text.length;i++) {
+      if(text[i] !== '#') {
+        newText += text[i];
+      }
+    }
+    return newText;
+  }
 
 }

@@ -32,7 +32,7 @@ export function NotesPage() {
         <SearchBar {...searchBarProps}></SearchBar>
 {        <div className="notesPage__wrapper">
           { (notes.length === 0) ?
-            <h2>Список заметок пуст</h2> :
+            <h2>Ничего не найдено</h2> :
             notes.map((note) => Note(note))}
         </div>}
       </>}

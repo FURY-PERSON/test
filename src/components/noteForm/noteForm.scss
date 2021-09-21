@@ -33,12 +33,10 @@
   }
 
   &__tagsInput {
-    width: 30%;
-    height: 30px;
     margin-top: 10px; 
-    margin-right: 450px;
-    padding-left: 10px;
     margin-bottom: 40px;
+    max-width: 580px;
+    word-wrap: break-word;
   }
 
   &__saveBtn {

@@ -31,8 +31,25 @@ async function deleteNoteById(id:string) {
 
 async function getNotesByTags(tags:string) {
   const notes = await getNotes();
-  notes.filter((note) => note.tags.includes(tags));
-  return notes;
+  const tagsArr = tags.split('#');
+  const notesArr:Array<NoteWithMatchConter> = [];
+  notes.forEach((note) => {
+    let counter = 0;
+    const noteTags = note.titleTags + note.descriptionTags;
+    for(let i=0; i<tagsArr.length; i++) {
+      if(noteTags.includes(tagsArr[i])) {
+        counter++;
+      }
+    }
+    if(counter !== 0)
+      notesArr.push({note:note, amount:counter});
+  })
+  notesArr.sort((a, b) => a.amount - b.amount);
+  const sortedNoteArr:Array<NoteProps> = []
+  notesArr.forEach((note) => {
+    sortedNoteArr.push(note.note);
+  })
+  return sortedNoteArr;
 }
 
 async function createStore() {
@@ -51,3 +68,8 @@ const ServerService = {
 }
 
 export default ServerService;
+
+interface NoteWithMatchConter {
+  note:NoteProps,
+  amount: number
+}
