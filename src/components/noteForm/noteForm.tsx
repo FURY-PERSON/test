@@ -14,7 +14,7 @@ export default function NoteForm() {
   };
   const [addNoteToServer, isLoading, err] = useFetching(addNewNote);
   const [note, setNote] = useState<NoteProps>({
-    date:getDate(),
+    date: '',
     description:'',
     title:'',
     titleTags: '',
@@ -91,6 +91,7 @@ export default function NoteForm() {
   function makeNoteForStore() {
     const newNote:NoteProps = {
       ...note,
+      date: getDate(),
       id: String(hashCode(note.title + Date.now()))
     }
     return newNote;

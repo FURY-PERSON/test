@@ -79,11 +79,11 @@ const getNoteById = (id:string) => {
       if ((<IDBRequest>event.target).result) {
         const cursor = (<IDBRequest>event.target).result;
         if(cursor.value.id === id) {
-          setTimeout(() => res(cursor.value), 1000);
+          res(cursor.value);
         }
         cursor.continue();
       } else {
-        setTimeout(() => {}, 1000);
+        res({});
       }
     };
   });
@@ -96,10 +96,10 @@ const deleteNoteById = (id:string) => {
     const req = objectStore.delete(id);
 
     req.onsuccess = () => {
-      setTimeout(() => res(true), 1000);
+      res(true)
     };
     req.onerror = () => {
-      setTimeout(() => res(false), 1000);
+      res(false)
     }
   });
 }
