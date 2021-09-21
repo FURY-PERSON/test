@@ -54,11 +54,16 @@ export default function NoteForm() {
 
   async function addNote(event:React.FormEvent) {
     event.preventDefault();
-    await addNoteToServer();
-    if(err) {
-      resetForm();
+    if(note.title.length !== 0) {
+      await addNoteToServer();
+      if(err) {
+        resetForm();
+      } else {
+        resetForm();
+      }
     } else {
       resetForm();
+      alert("Заголовок не может быть пустым");
     }
   }
 
