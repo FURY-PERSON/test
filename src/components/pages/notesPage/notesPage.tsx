@@ -32,7 +32,7 @@ export function NotesPage() {
 {        <div className="notesPage__wrapper">
           { (notes.length === 0) ?
             <h2>Ничего не найдено</h2> :
-            notes.map((note) => <Note {...note} key={Date.now() + note.title}></Note>)}
+            notes.map((note) => Note(note))}
         </div>}
       </>}
   </div>)
