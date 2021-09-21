@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { NoteProps } from '../note/note';
-import ServerService from '../serverService/serverService';
-import useFetching from "../hooky/useFetching";
-import Loader from '../UI/loader/loader';
 import { hashCode } from '../../tool/hashFunction';
+import { getDate } from '../../tool/getDate';
+import ServerService from '../serverService/serverService';
+import Loader from '../UI/loader/loader';
+import useFetching from "../hooky/useFetching";
 import "./noteForm.scss";
 
 export default function NoteForm() {
@@ -13,7 +14,7 @@ export default function NoteForm() {
   };
   const [addNoteToServer, isLoading, err] = useFetching(addNewNote);
   const [note, setNote] = useState<NoteProps>({
-    date:String(Date.now()),
+    date:getDate(),
     description:'',
     title:'',
     titleTags: '',
@@ -85,16 +86,6 @@ export default function NoteForm() {
     if(tagsStr.length === 1)
       return ''
     return tagsStr;
-  }
-
-  function deleteHashSymbols(text:string) {
-    let newText = '';
-    for(let i=0; i<text.length; i++) {
-      if(text[i] !== '#') {
-        newText += text[i];
-      }
-    }
-    return newText;
   }
 
   function makeNoteForStore() {

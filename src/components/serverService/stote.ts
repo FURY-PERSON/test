@@ -3,28 +3,6 @@ import { NoteProps } from "../note/note";
 let dbReq: IDBOpenDBRequest;
 let db: IDBDatabase;
 
-/* async function fetchNotes() {
-
-}
-
-async function fetchNoteById(id:string) {
-
-} */
-
-/* async function patchNoteById(id:string) {
-
-}
-
-async function deleteNoteById(id:string) {
-
-}
-
-async function addNewNote(noteStr:string) {
-
-}
- */
-
-
 const createDB = () => {
   return new Promise((resolve, reject) => {
     dbReq = indexedDB.open('notesStore', 1);
@@ -48,7 +26,7 @@ const addNote = (newNote: NoteProps) => {
     const tx = db.transaction(['notes'], 'readwrite');
     const store = tx.objectStore('notes');
     store.add(newNote);
-    res(true);
+    setTimeout(() => res(true), 1000);
   });
 };
 
@@ -62,7 +40,7 @@ const updateNote = (note:NoteProps) => {
       const cursor = (<IDBRequest>event.target).result;
       if (cursor.value.id === note.id) {
         cursor.update(note, note.id);
-        res(true);
+        setTimeout(() => res(true), 1000);
       }
     };
     req.onerror = () => rej(false);
@@ -86,7 +64,7 @@ const getNotes = (): Promise<NoteProps[]> => {
       };
 
       tx.oncomplete = () => {
-        resolve(allNotes);
+        setTimeout(() => resolve(allNotes),1000);
       };
   });
 }
@@ -101,11 +79,11 @@ const getNoteById = (id:string) => {
       if ((<IDBRequest>event.target).result) {
         const cursor = (<IDBRequest>event.target).result;
         if(cursor.value.id === id) {
-          res(cursor.value)
+          setTimeout(() => res(cursor.value), 1000);
         }
         cursor.continue();
       } else {
-        res({});
+        setTimeout(() => {}, 1000);
       }
     };
   });
@@ -118,10 +96,10 @@ const deleteNoteById = (id:string) => {
     const req = objectStore.delete(id);
 
     req.onsuccess = () => {
-      res(true);
+      setTimeout(() => res(true), 1000);
     };
     req.onerror = () => {
-      rej(false);
+      setTimeout(() => res(false), 1000);
     }
   });
 }

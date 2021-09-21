@@ -1,39 +1,32 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import useFetching from "../hooky/useFetching";
 import { NoteProps } from "../note/note";
+import useFetching from "../hooky/useFetching";
 import ServerService from "../serverService/serverService";
 import Loader from "../UI/loader/loader";
 import "./noteDetail.scss";
 
 
 export function NoteDetail(props:NoteProps) {
-  const save = async  () => {
-    await saveChanges();
-  }
+  const save = async () => { await saveChanges()};
   const [isEditMode, setIsEditMode] = useState(false);
   const [noteDetail, setNoteDetail] = useState<NoteProps>(props);
   const [saveNote, isLoading, err] = useFetching(save);
 
   const saveChanges = async () => {
-    const isSuccess = await ServerService.updateNote(noteDetail);
-
-    if(/* isSuccess */ true) {
-      setIsEditMode(false);
-    } else {
-      alert(err);
-    }
+    await ServerService.updateNote(noteDetail);
+    setIsEditMode(false);
   }
 
   const onTitleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    const tagsSrt = defineTags(value);
+    const tagsSrt = defineTagsStr(value);
     setNoteDetail({...noteDetail, title: value, titleTags: tagsSrt});
   }
 
   const onDescriptionChange = (event:React.ChangeEvent<any>) => {
     const value = event.target.value;
-    const tagsSrt = defineTags(value);
+    const tagsSrt = defineTagsStr(value);
     setNoteDetail({...noteDetail, description: value, descriptionTags: tagsSrt});
   }
 
@@ -45,14 +38,14 @@ export function NoteDetail(props:NoteProps) {
           <div className="noteDetail">
             <NavLink to={"/notes"} className="noteDetail__closeBtn" >&#10060;</NavLink>
             <button className="noteDetail__edit" onClick={() => setIsEditMode(true)}>edit</button>
-            <p className="noteDetail__title">{MakeMarckHtml(noteDetail.title)}</p>
-            <p className="noteDetail__description">{MakeMarckHtml(noteDetail.description)}</p>
+            <p className="noteDetail__title">{MakeMarckedHtml(noteDetail.title)}</p>
+            <p className="noteDetail__description">{MakeMarckedHtml(noteDetail.description)}</p>
             <span className="noteDetail__date">{noteDetail.date}</span>
             <span className="noteDetail__tags">{noteDetail.titleTags + " " + noteDetail.descriptionTags}</span>
           </div> :
 
           <div className="noteDetail">
-            <NavLink to={"/notes"} className="noteDetail__closeBtn" >&#10060;</NavLink>
+            <NavLink to={"/notes"} className="noteDetail__closeBtn">&#10060;</NavLink>
             <button className="noteDetail__edit" onClick={() => saveNote()}>apply</button>
             <input className="noteDetail__title" value={noteDetail.title} onChange={onTitleChange}></input>
             <textarea className="noteDetail__description textArea" value={noteDetail.description} onChange={onDescriptionChange}></textarea>
@@ -63,7 +56,7 @@ export function NoteDetail(props:NoteProps) {
     </>
   );
 
-  function defineTags(text: string) {
+  function defineTagsStr(text: string) {
     let tagsStr = '';
     for(let i=0; i<text.length; i++) {
       if(text[i] === '#') {
@@ -78,7 +71,7 @@ export function NoteDetail(props:NoteProps) {
     return tagsStr;
   }
 
-  function MakeMarckHtml(text:string) {
+  function MakeMarckedHtml(text:string) {
     const textWithIutHash = deleteHashSymbolFromText(text);
     const tagsArr = (props.titleTags + props.descriptionTags).split('#');
     let textArr = textWithIutHash.split(" ");

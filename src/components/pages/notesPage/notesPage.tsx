@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
-import useFetching from "../../hooky/useFetching"
 import { Note, NoteProps } from "../../note/note";
 import { SearchBar, SearchBarProps } from "../../searchBar/searchBar";
+import useFetching from "../../hooky/useFetching"
 import ServerService from "../../serverService/serverService";
 import Loader from "../../UI/loader/loader";
 import "./notesPage.scss";
 
 export function NotesPage() {
-  const get = async  () => {
+  const getNotes = async  () => {
     const notes = await ServerService.getNotesByTags(query);
     setNotes(notes);
   }
   const [query, setQuery] = useState('');
-  const [getNotesFromServer, isLoading, err] = useFetching(get);
+  const [getNotesFromServer, isLoading, err] = useFetching(getNotes);
   const [notes, setNotes] = useState<Array<NoteProps>>([]);
-
   useEffect(() => {
     getNotesFromServer();
   }, [query]);
