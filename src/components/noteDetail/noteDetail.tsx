@@ -76,11 +76,11 @@ export function NoteDetail(props:NoteProps) {
     const tagsArr = (props.titleTags + props.descriptionTags).split('#');
     let textArr = textWithIutHash.split(" ");
     return (
-    <p>
+    <>
       {textArr.map((textt, i) => {
-        return tagsArr.includes(textArr[i]) ? <span className="marckSpan">{textArr[i]+ ' '}</span> : textArr[i] + ' ';
+        return tagsArr.includes(textArr[i]) ? <span key={Date.now()} className="marckSpan">{textArr[i]+ ' '}</span> : textArr[i] + ' ';
       })}
-    </p>); 
+    </>); 
   }
 
   function deleteHashSymbolFromText(text:string) {
